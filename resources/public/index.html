@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cilles Insta-Search</title>
+	<script type="text/javascript" src="/instasearch/console/js/jquery-2.0.3.min.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="/instasearch/console/js/instasearch.js" charset="UTF-8"></script>
+
+	    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <script src="js/bootstrap.min.js"></script>
+
+
+    <style type="text/css">	
+	    body { padding-top: 50px;}
+    </style>
+</head>
+<body>
+
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Cilles Insta-Search</a>
+        </div>
+        <div class="navbar-collapse collapse">
+    	  <ul class="nav navbar-nav">
+            <li><a href="https://api.instagram.com/oauth/authorize/?client_id=9b52b1bde6834824852b205635cf0333&redirect_uri=http://localhost:7913/instasearch/console/index.html&response_type=code">Log Ind</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" placeholder="Tag uden #" class="form-control" id="tag">
+            </div>
+            <button type="submit" class="btn btn-success" id="search">Søg</button>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+		<ul id="list" class="container">
+		</ul>
+	</div> 
+
+	<div class="jumbotron">
+		<div class="container"><p><a class="btn btn-primary btn-lg" id="next">Næste 10</a> af <span id="count">0</span> fundet</p></div>
+	</div>
+</body>
+</html>
