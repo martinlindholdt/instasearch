@@ -11,7 +11,7 @@
 (def options {:timeout 5000             ; ms
               ;:basic-auth ["user" "pass"]
               ;:query-params {:param "value" :param2 ["value1" "value2"]}
-              :user-agent "TDC/instasearch 0.0.1"
+              :user-agent "TDC/instasearch 0.0.3"
               ;:headers {"X-Header" "Value"}
               })
 
@@ -56,3 +56,22 @@
         (println "Page search:" uri)
         (println "Sync HTTP GET: " status)
         body))))
+
+
+(defn copy-uri-to-file [file uri]
+  (with-open [in (clojure.java.io/input-stream uri)
+              out (clojure.java.io/output-stream file)]
+    
+    (do (clojure.java.io/copy in out) )
+    file))
+
+(defn save-one [uri] 
+  (let [;{:keys [status headers body error] :as resp} @(http/get (str uri)) 
+        file-name (str "images/" (last (clojure.string/split uri #"/")))
+        _ (println "Saving: " uri " to file:" file-name)]
+        (copy-uri-to-file file-name uri)))
+
+(defn save-all [to-save] 
+  (let [dir (.mkdir (java.io.File. "images"))
+        res (pmap save-one to-save)]
+  (count res)))

@@ -2,11 +2,14 @@ $(document).ready(function(){
 	$("#next").hide();
 	$("#search").click(is.search);
 	$("#next").click(is.nextpage);
+	$("#save").click(is.saveImages);
 
 });
 
 var baseurl = "/instasearch/";
-var nexturl = "";
+var nexturl = ""; 
+
+var saves = []; 
 
 var is = {
 
@@ -33,6 +36,7 @@ var is = {
 		//var fullName = idata.user.full_name; 
 		var username = idata.user.username; 
 		var imageUri = idata.images.standard_resolution.url; 
+		saves.push(imageUri); 
 
 		$("#list").append('<li><img src='+imageUri+'><p><a href="' + idata.link + '" target="_blank">'+username+'</a></p></li>');
 
@@ -51,5 +55,10 @@ var is = {
 
 		});
 
+	}, 
+	saveImages:function(){
+		$.post(baseurl+"save/", {'saves' : saves}, function(d,status){
+			console.log(saves, status, d);
+		}); 
 	}
 }

@@ -3,7 +3,7 @@
         ring.middleware.resource
         ring.middleware.file-info
         ;[clojure.data.json :only (json-str)]
-        [instasearch.core :only [search-tag pagination-next count-tag]]
+        [instasearch.core :only [search-tag pagination-next count-tag save-all]]
         )
 
    (:require 
@@ -51,12 +51,22 @@
           _ (prn max-tag-id)]
       (pagination-next (str next-uri "&max_tag_id=" max-tag-id )))) 
   
+  (POST [":context/save/" :context #".[^/]*"] req 
+    ( let [saves (get-in req [:form-params "saves[]"])
+           ;_ (prn "Saving:")
+           ;_ (map prn saves)
+           ]
+      (json-response {:savecount (save-all saves)} "application/json")))
     
   
   
   (GET [":context/ping", :context #".[^/]*"] []
     {:status 200, :headers {"Content-Type" "text/plain" "expires" "0" "cache-control" "no-cache"} :body "pong"})
   
+  (GET [":context/quit", :context #".[^/]*"] [] 
+    (System/exit 0)
+    {:status 200, :headers {"Content-Type" "text/plain" "expires" "0" "cache-control" "no-cache"} :body "Bye for now!"})
+
   ; (GET [":context/alive-info", :context #".[^/]*"] req
   ;   ;(json-response (alive/get-alive-info) mediatype))
   ;   (json-response {:hej "verden"} "application/json"))

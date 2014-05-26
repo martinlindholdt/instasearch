@@ -1,4 +1,4 @@
-(defproject instasearch "0.0.2"
+(defproject instasearch "0.0.3"
   :description "Searching Instagram API"
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [compojure "1.1.5"]
