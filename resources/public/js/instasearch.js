@@ -17,6 +17,7 @@ var is = {
 
 		var tag = $("#tag").val();
 		$("#list").empty();
+		saves = [];
 
 		is.tagcount(tag);
 		$.getJSON(baseurl + "search/" + tag, function(o, status){
